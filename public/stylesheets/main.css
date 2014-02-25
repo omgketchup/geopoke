@@ -1,0 +1,26 @@
+/* main.css */
+.top-bar{
+	color:#fff;
+	background:#000;
+}
+.top-bar .name h1{
+	color:#fff;
+}
+.top-bar .name h1 a{
+	display:block;
+}
+.top-bar ul, .top-bar ul li{
+	margin:0px;
+	display:inline-block;
+}
+
+nav .icons img{
+	max-height:90%;
+	padding-top:5%; padding-bottom:5%;
+}
+.icons{
+	text-align:right;
+}
+.icons a{
+	padding-left:.25em; padding-right:.25em;
+}

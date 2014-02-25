@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta content='width=device-width, initial-scale=1, user-scalable=no' name='viewport'>
+<!--
+  	<meta content="yes" name="mobile-web-app-capable">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+
+	<link rel="shortcut icon" sizes="196x196" href="icon-android-highres.png">
+	<link rel="shortcut icon" sizes="128x128" href="icon-android.png">
+
+	<link rel="apple-touch-icon" href="icon-iphone.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="icon-ipad.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="icon-iphone-retina.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="icon-ipad-retina.png">
+-->
+    <title><%= title %></title>
+    <!-- Foundation CSS -->
+    <link rel='stylesheet' href='/vendor/foundation/css/foundation.min.css' />
+	<link rel='stylesheet' href='/vendor/foundation-icons/foundation-icons.css' />
+
+	<!-- App CSS -->
+    <link rel='stylesheet' href='/stylesheets/main.css' />
+    
+    <!-- Modernizr -->
+    <script src="/vendor/modernizr/modernizr.js"></script>
+  </head>
+  <body ng-app='poke'>
+  	<!-- HEADER -->
+  	<nav class='top-bar'>
+  		<div class='large-5 small-5 columns name'>
+  			<h1><%= title %></h1>
+  		</div>
+  		<div class='large-7 small-7 columns'>
+  			<span class='right icons'>
+  				<a href='#'><img src='/images/ui/backpack_icon_64.png' alt='pokeball' title='Click to manage your Backpack' /></a>
+  				<a href='#'><img src='/images/ui/pokeball_icon_64.png' alt='pokeball' title='Click to manage your Pokemon' /></a>
+  				<a href='#'><img src='/images/ui/pokedex_icon_64.png' alt='pokedex' title='Click to access the Pokedex' /></a>
+  				<a href='#'><i class='fi-power'></i></a>
+  			</span>
+  		</div>
+  	</nav>
+
+  	<!-- MAIN APPLICATION CONTENT -->
+  	<section ui-view>
+  		
+  	</section>
+
+  	<!-- FOOTER -->
+  	<footer>
+  		Footer. Footer never changes.
+  	</footer>
+
+    <!-- Javascript -->
+
+    <!-- Angular -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script> -->
+
+    <!-- Local Angular Fallback -->
+    <script src="/vendor/angular/angular.min.js"></script>
+    
+    <!-- Local Angular-UI Router -->
+    <script src="/vendor/angular-ui/ui-router.js"></script>
+
+    <!-- App -->
+    <script src='/javascripts/main.js'></script>
+  </body>
+</html>
