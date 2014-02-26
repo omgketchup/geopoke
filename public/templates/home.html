@@ -1,1 +1,21 @@
-<h1>HOME</h1>
+<p class='alert-box' data-ng-show='geoError'><strong>{{ geoError }}</strong></p>
+<p data-ng-show='loc' class='location'>{{ loc[0].formatted_address }}</p>
+<div data-ng-show='loc'>
+	<div class='row collapse'>
+		<div class='large-4 small-4 columns headshot'>
+			<img style='display:none;' class='headshot' src='/images/ash_headshot.jpg' />
+		</div>
+		<div class='large-8 small-8 columns home-title'>
+			<h4>Explore {{ loc[0].address_components[1].short_name + ", " + loc[0].address_components[2].long_name }}</h4>
+			<div class="progress">
+			  <span class="meter" style='width:80%;'></span>
+			</div>
+		</div>
+	</div>
+	<ul>
+		<li data-ng-repeat='venue in nearbyVenues | limitTo:8'>
+			<a href='#'>{{venue.name}}</a>
+			<small>{{venue.categories[0].name}}</small>
+		</li>
+	</ul>
+</div>

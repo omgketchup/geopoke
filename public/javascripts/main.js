@@ -7,27 +7,108 @@ var poke = angular.module('poke', ['ui.router'])
 			templateUrl: '/templates/home.html',
 			controller: 'HomeCtrl'
 		});
-	})
-	.controller('HomeCtrl', function($scope, $http){
+	});
+poke.controller('HomeCtrl', function($scope, $http, GeoLocation){
 		console.log("Using HomeCtrl");
+		var secureMapEndpoint = 'https://maps.googleapis.com/maps/api/geocode/json?';
+		
+		//$scope.loc = GeoLocation.getCurrentLocation().message;
+		GeoLocation.getCurrentLocation().then(
+			function(loc){
+				$scope.loc = loc.data;
+				GeoLocation.getVenuesNearby(loc.coords).then(
+					function(venueResponse){
+						$scope.nearbyVenues = venueResponse.response.venues;
+					},
+					function(errorResponse){
+						console.log("Got an error instead of venues.");
+					}
+				);
+			},
+			function(reason){
+				$scope.geoError = reason;
+				console.log("FAILED: " + reason);
+			}
+		);
+	})
+;
 
-		//Initialize Location, probably turn this into a service or something.
-		if(navigator.geolocation){ //This probably works because we're targeting mobile, which should have good support for this.
+//GeoLocation this is kinda sweet
+poke.factory('GeoLocation', function($q, $http, $filter){
+	var getCurrentLocation = function () {
+		var deferred = $q.defer();
+		if(navigator.geolocation){
 			navigator.geolocation.getCurrentPosition(
-				function(pos){ //Handle success
-					$scope.geoPosition = pos;
+				function(pos){
+					//Setup Google Geocoder
+					var geocoder = new google.maps.Geocoder();
+					var latlng = new google.maps.LatLng(
+						pos.coords.latitude, 
+						pos.coords.longitude);
+
+					geocoder.geocode(
+						{'latLng':latlng},
+						function(results, status){
+							//Handle Geocode Response
+							if(status == google.maps.GeocoderStatus.OK){
+								var loc = results;
+								deferred.resolve(
+									{
+										status: "success",
+										message:"Deferred resolved, I have no idea what I'm doing!",
+										data: loc,
+										coords: pos.coords
+									}
+								);
+							}else{
+								deferred.reject('There was an error getting your location, try again later.');
+							}	
+						}
+					);
 				},
-				function(error){ //Handle failure
+				function(error){
 					if(error.code == 1){
-						alert("You need to allow this app to access your location, otherwise it won't work!");
-					}else{
-						alert("Sorry, try reloading the page, we couldn't find your location.");
+						deferred.reject("You need to enable GeoLocation to use this application.");
+					}else if(error.code == 2){
+						deferred.reject("Your location is currently unavailable, please connect to a network or try again later.");
+					}else if(error.code == 3){
+						deferred.reject("The location request timed out. Please try again.");
 					}
 				}
 			);
 		}else{
-			alert("You ain't got no geolocation, get a better phone or browser so you can use this app.");
+			deferred.reject('You need to upgrade your browser to use this application.');
 		}
+		return deferred.promise;
+	};
 
-	})
-;
+	var getVenuesNearby = function(coords){
+		console.log("Foursquare is looking for venues near: " + coords.latitude + ", " + coords.longitude);
+		console.debug(coords);
+		var deferred = $q.defer();
+		//God this is dumb.
+	    var angdate = $filter('date')(Date.now(), "yyyyMMdd");
+		$http({
+			method: 'GET',
+			url: 'https://api.foursquare.com/v2/venues/search',
+			params: {
+				ll: coords.latitude + "," + coords.longitude,
+				client_id: 'PRPLLWWLXSHR0NAY0SUIJ1WLI13AEJSIE03RBVJ0QNGWY4EJ',
+				client_secret: '1JWJ1SMZJULDLG1TKHNPBT5FMHOG1F2QT4EAS02SB0QODVTZ',
+				v: angdate
+			}
+		})
+		.success(function(response){
+			deferred.resolve(response);
+		})
+		.error(function(response){
+			deferred.reject(reponse);
+		});
+		return deferred.promise;
+	};
+
+	return {
+		getCurrentLocation: getCurrentLocation,
+		getVenuesNearby: getVenuesNearby
+	};
+});
