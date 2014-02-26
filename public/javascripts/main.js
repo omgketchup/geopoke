@@ -6,13 +6,17 @@ var poke = angular.module('poke', ['ui.router'])
 			url: '/',
 			templateUrl: '/templates/home.html',
 			controller: 'HomeCtrl'
+		})
+		.state('dex', {
+			url: '/pokedex',
+			templateUrl: '/templates/pokedex.html',
+			controller: 'DexCtrl'
 		});
 	});
 poke.controller('HomeCtrl', function($scope, $http, GeoLocation){
 		console.log("Using HomeCtrl");
 		var secureMapEndpoint = 'https://maps.googleapis.com/maps/api/geocode/json?';
 		
-		//$scope.loc = GeoLocation.getCurrentLocation().message;
 		GeoLocation.getCurrentLocation().then(
 			function(loc){
 				$scope.loc = loc.data;
