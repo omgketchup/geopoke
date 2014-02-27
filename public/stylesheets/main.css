@@ -41,3 +41,16 @@ ul, li{
 .home-title .progress{
 	margin:.25em;
 }
+.button a{
+	color:#fff;
+}
+.monbar{
+	border-bottom:thin dotted black;
+	cursor:pointer;
+}
+.mon-pic{
+	background:#f00 url('/images/pokemon_sprites.png') -125px 0px;
+	background-size:1499px 1282px;
+	min-width:47.5px;
+	height:47.5px;
+}

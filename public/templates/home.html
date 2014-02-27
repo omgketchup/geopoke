@@ -12,10 +12,13 @@
 			</div>
 		</div>
 	</div>
-	<ul>
-		<li data-ng-repeat='venue in nearbyVenues | limitTo:8'>
-			<a href='#'>{{venue.name}}</a>
-			<small>{{venue.categories[0].name}}</small>
-		</li>
-	</ul>
+	<div class='row'>
+		<div class='small-10 small-offset-1'>
+			<ul>
+				<li class='button tiny expand' data-ng-repeat='venue in nearbyVenues | limitTo:8' >
+					<a href='#'>{{venue.name}}</a>
+				</li>
+			</ul>
+		</div>
+	</div>
 </div>

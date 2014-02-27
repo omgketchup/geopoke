@@ -18,9 +18,9 @@
     <title><%= title %></title>
     <!-- Foundation CSS -->
     <link rel='stylesheet' href='/vendor/foundation/css/foundation.min.css' />
-	<link rel='stylesheet' href='/vendor/foundation-icons/foundation-icons.css' />
+	  <link rel='stylesheet' href='/vendor/foundation-icons/foundation-icons.css' />
 
-	<!-- App CSS -->
+	  <!-- App CSS -->
     <link rel='stylesheet' href='/stylesheets/main.css' />
     
     <!-- Modernizr -->
@@ -35,8 +35,8 @@
   		<div class='large-7 small-7 columns'>
   			<span class='right icons'>
   				<a href='#'><img src='/images/ui/backpack_icon_64.png' alt='pokeball' title='Click to manage your Backpack' /></a>
-  				<a href='#'><img src='/images/ui/pokeball_icon_64.png' alt='pokeball' title='Click to manage your Pokemon' /></a>
-  				<a href='#'><img src='/images/ui/pokedex_icon_64.png' alt='pokedex' title='Click to access the Pokedex' /></a>
+  				<a ng-click='alert("wtf");' href='#'><img src='/images/ui/pokeball_icon_64.png' alt='pokeball' title='Click to manage your Pokemon' /></a>
+  				<a ui-sref='dex'><img src='/images/ui/pokedex_icon_64.png' alt='pokedex' title='Click to access the Pokedex' /></a>
   				<a href='#'><i class='fi-power'></i></a>
   			</span>
   		</div>

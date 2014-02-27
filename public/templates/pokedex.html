@@ -1,0 +1,15 @@
+<ul>
+	<li ng-repeat='mon in pokemon'>
+		<div ng-click='alert("STUFF");' class='row monbar'>
+			<div class='large-3 small-3 columns'>
+				<div class='mon-pic' ng-style='GetSpritePositionByIndex(mon.id)'>
+					<!-- Image displayed as background from sprite w/ offset -->
+				</div>
+			</div>
+			<div class='mon-info large-9 small-9 columns'>
+				<h4>{{ mon.id }} | {{ mon.name }}</h4>
+				<span>{{mon.type}}</span>
+			</div>
+		</div>
+	</li>
+</ul>
